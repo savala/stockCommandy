@@ -23,16 +23,6 @@ clean() {
     rmdir ~/.stocks
 }
 
-if [ "$1" = "-add" ];then
-    add $2
-fi
-if [ "$1" = "-get" ]
-    then
-        get $1 $2
-fi
-if [ "$1" = "-clean" ];then
-    clean
-fi
 if [ -z "$1" ];then
     if [ ! -f ~/.stocks/stocksList.txt ];then
         echo "You must add a stock (i.e. stocks -add aapl)"
@@ -45,4 +35,16 @@ if [ -z "$1" ];then
             echo "$ticker\tprice: $price"
         done < ~/.stocks/stocksList.txt
     fi
+else
+    case $1 in
+        "-add" )
+            add $2
+            break ;;
+        "-get" )
+            get $1 $2
+            break ;;
+        "-clean" )
+            clean
+            break ;;
+    esac
 fi
