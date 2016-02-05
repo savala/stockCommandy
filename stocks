@@ -1,0 +1,1 @@
+curl -s 'http://download.finance.yahoo.com/d/quotes.csv?s=aapl&f=l1'
