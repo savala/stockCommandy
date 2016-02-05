@@ -18,12 +18,20 @@ add() {
     echo "Added $1 to list of stocks"
 }
 
+clean() {
+    rm ~/.stocks/stocksList.txt
+    rmdir ~/.stocks
+}
+
 if [ "$1" = "-add" ];then
     add $2
 fi
 if [ "$1" = "-get" ]
     then
         get $1 $2
+fi
+if [ "$1" = "-clean" ];then
+    clean
 fi
 if [ -z "$1" ];then
     if [ ! -f ~/.stocks/stocksList.txt ];then
