@@ -1,3 +1,4 @@
+# Built by Sai Avala
 get() {
     if [ -z "$2" ]
         then
@@ -23,6 +24,10 @@ clean() {
     rmdir ~/.stocks
 }
 
+help() {
+    echo "-add <ticker>, ie. -add xyz \n-clean\n-get xyz"
+}
+
 if [ -z "$1" ];then
     if [ ! -f ~/.stocks/stocksList.txt ];then
         echo "You must add a stock (i.e. stocks -add aapl)"
@@ -45,6 +50,9 @@ else
             break ;;
         "-clean" )
             clean
+            break ;;
+        "-help" )
+            help
             break ;;
     esac
 fi
