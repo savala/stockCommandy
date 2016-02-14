@@ -34,6 +34,10 @@ help() {
     echo "-add <ticker>, ie. -add xyz \n-clean\n-get xyz"
 }
 
+list() {
+    cat ~/.stocks/stocksList.txt
+}
+
 if [ -z "$1" ];then
     if [ ! -f ~/.stocks/stocksList.txt ];then
         echo "You must add a stock (i.e. stocks -add xyz)"
@@ -70,6 +74,9 @@ else
         "-del" )
             echo $2
             delete $2
+            break ;;
+        "-list" )
+            list
             break ;;
         "-help" )
             help
