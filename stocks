@@ -22,7 +22,8 @@ add() {
 }
 
 delete() {
-    echo $1 | awk "!/$1/" ~/.stocks/stocksList.txt > temp && mv temp ~/.stocks/stocksList.txt
+    stock=$(echo $1 | awk '{print toupper($0)}')
+    echo $stock | awk "!/$stock/" ~/.stocks/stocksList.txt > temp && mv temp ~/.stocks/stocksList.txt
 }
 
 clean() {
@@ -40,7 +41,7 @@ openStockPage() {
 }
 
 help() {
-    echo "-add <ticker>, ie. -add xyz \n-clean\n-get xyz"
+    echo "add <ticker>, ie. add xyz \nclean\nget xyz"
 }
 
 if [ -z "$1" ];then
@@ -76,8 +77,7 @@ else
         "-clean" )
             clean
             break ;;
-        "-del" )
-            echo $2
+        "-rm" )
             delete $2
             break ;;
         "-list" )

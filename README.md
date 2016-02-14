@@ -47,7 +47,7 @@ stocks -open xyz
 
 ## Delete stock from watchlist
 ```sh
-stocks -del xyz
+stocks -rm xyz
 ```
 
 ## Clean up your watchlist
