@@ -1,5 +1,4 @@
 # Built by Sai Avala
-
 get() {
     if [ -z "$2" ]
         then
