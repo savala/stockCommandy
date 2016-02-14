@@ -36,7 +36,7 @@ help() {
 
 if [ -z "$1" ];then
     if [ ! -f ~/.stocks/stocksList.txt ];then
-        echo "You must add a stock (i.e. stocks -add aapl)"
+        echo "You must add a stock (i.e. stocks -add xyz)"
     else
         stocks=""
         while read -r line
