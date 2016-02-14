@@ -9,7 +9,7 @@ get() {
     url="http://download.finance.yahoo.com/d/quotes.csv?s=$2&f=l1"
     price=$(curl -s $url)
     ticker=$(echo "$2" | awk '{print toupper($0)}')
-    echo "$ticker\tprice: $price"
+    echo "$ticker\tPrice: $price"
 }
 
 add() {
@@ -30,12 +30,17 @@ clean() {
     rmdir ~/.stocks
 }
 
-help() {
-    echo "-add <ticker>, ie. -add xyz \n-clean\n-get xyz"
-}
-
 list() {
     cat ~/.stocks/stocksList.txt
+}
+
+openStockPage() {
+    url="https://finance.yahoo.com/q?s=$1"
+    open $url
+}
+
+help() {
+    echo "-add <ticker>, ie. -add xyz \n-clean\n-get xyz"
 }
 
 if [ -z "$1" ];then
@@ -77,6 +82,9 @@ else
             break ;;
         "-list" )
             list
+            break ;;
+        "-open" )
+            openStockPage $2
             break ;;
         "-help" )
             help
