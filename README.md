@@ -11,6 +11,7 @@ export PATH=$PATH:<path>/stockCommandy
 ```
 
 If you'd like, you can go ahead and create an alias for stocks as well
+Within bashrc or zshrc or whatever you use
 
 ```sh
 alias ss="stocks"
