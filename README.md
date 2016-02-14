@@ -1,6 +1,19 @@
 # Stock Commandy
 Stock Commandy allows to create their own watchlist and query that in a command line interface
 
+# Setup
+Add the stocks script to your path
+Make sure that your permissions are set so that the script can create a ~/.stocks folder and ~/.stocks/stocksList.txt file
+```sh
+export PATH=$PATH:<path>/stockCommandy
+```
+
+If you'd like, you can go ahead and create an alias for stocks as well
+
+```sh
+alias ss="stocks"
+```
+
 # Get all your stocks
 ```sh
 stocks
