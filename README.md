@@ -17,6 +17,8 @@ Within bashrc or zshrc or whatever you use
 alias ss="stocks"
 ```
 
+![alt text](https://github.com/savala/stockCommandy/raw/master/screenshots/screenshot.png "Output")
+
 # Get all your stocks
 ```sh
 stocks
