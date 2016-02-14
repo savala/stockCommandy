@@ -15,8 +15,9 @@ add() {
     if [ ! -d ~/.stocks ];then
         mkdir ~/.stocks
     fi
-    echo "$1" >> ~/.stocks/stocksList.txt
-    echo "Added $1 to list of stocks"
+    stock=$(echo $1 | awk '{print toupper($0)}')
+    echo "$stock" >> ~/.stocks/stocksList.txt
+    echo "Added $stock to list of stocks"
 }
 
 delete() {
@@ -41,8 +42,8 @@ if [ -z "$1" ];then
         do
             stocks+="$line,"
         done < ~/.stocks/stocksList.txt
-        url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=p"
-        # url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=l1a"
+        # url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=p"
+        url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=l1a"
         prices=$(curl -s $url)
         prices=(${prices//\n/ })
         stocks=(${stocks//,/ })
