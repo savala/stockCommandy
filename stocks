@@ -1,28 +1,29 @@
+#! /usr/bin/env bash
 # Built by Sai Avala
 
 get() {
     if [ -z "$2" ]
         then
-            echo "No stock tickers passed"
+            printf "No stock tickers passed.\n"
             return
     fi
     url="http://download.finance.yahoo.com/d/quotes.csv?s=$2&f=l1"
     price=$(curl -s $url)
-    ticker=$(echo "$2" | awk '{print toupper($0)}')
-    echo "$ticker\tprice: $price"
+    ticker=$(printf "%s" "$2" | awk '{print toupper($0)}')
+    printf "%s\tprice: %s\n" "$ticker" "$price"
 }
 
 add() {
     if [ ! -d ~/.stocks ];then
         mkdir ~/.stocks
     fi
-    stock=$(echo $1 | awk '{print toupper($0)}')
-    echo "$stock" >> ~/.stocks/stocksList.txt
-    echo "Added $stock to list of stocks"
+    stock=$(printf "%s" "$1" | awk '{print toupper($0)}')
+    printf "%s\n" "$stock" >> ~/.stocks/stocksList.txt
+    printf "Added %s to list of stocks.\n" $stock
 }
 
 delete() {
-    echo $1 | awk "!/$1/" ~/.stocks/stocksList.txt > temp && mv temp ~/.stocks/stocksList.txt
+    printf "%s" $1 | awk "!/$1/" ~/.stocks/stocksList.txt > temp && mv temp ~/.stocks/stocksList.txt
 }
 
 clean() {
@@ -31,7 +32,7 @@ clean() {
 }
 
 help() {
-    echo "-add <ticker>, ie. -add xyz \n-clean\n-get xyz"
+    printf "-add <ticker>, ie. -add xyz \n-clean\n-get xyz\n"
 }
 
 list() {
@@ -40,7 +41,7 @@ list() {
 
 if [ -z "$1" ];then
     if [ ! -f ~/.stocks/stocksList.txt ];then
-        echo "You must add a stock (i.e. stocks -add xyz)"
+        printf "You must add a stock (i.e. stocks -add xyz)\n"
     else
         stocks=""
         while read -r line
@@ -52,34 +53,28 @@ if [ -z "$1" ];then
         prices=$(curl -s $url)
         prices=(${prices//\n/ })
         stocks=(${stocks//,/ })
-        for key in "${!stocks[@]}"; do 
+        for key in "${!stocks[@]}"; do
             stock=$(echo ${stocks[$key]} | awk '{print toupper($0)}')
             p=${prices[$key]}
             x=(${p//,/ })
             #echo "$stock\tPrice: ${x[0]}\tSomething: ${x[1]}";
-            echo "$stock\tPrice: ${x[0]}";
+            printf "%s\tPrice: %s\n" "${stock}" "${x[0]}"
         done
     fi
 else
     case $1 in
         "-add" )
-            add $2
-            break ;;
+            add $2;;
         "-get" )
-            get $1 $2
-            break ;;
+            get $1 $2;;
         "-clean" )
-            clean
-            break ;;
+            clean;;
         "-del" )
-            echo $2
-            delete $2
-            break ;;
+            printf "%s\n" "${2}"
+            delete $2;;
         "-list" )
-            list
-            break ;;
+            list;;
         "-help" )
-            help
-            break ;;
+            help;;
     esac
 fi
