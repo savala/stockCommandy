@@ -2,14 +2,14 @@
 # Built by Sai Avala
 
 get() {
-    if [ -z "$2" ]
+    if [ -z "$1" ]
         then
             printf "No stock tickers passed.\n"
             return
     fi
-    url="http://download.finance.yahoo.com/d/quotes.csv?s=$2&f=l1"
+    url="http://download.finance.yahoo.com/d/quotes.csv?s=$1&f=l1"
     price=$(curl -s $url)
-    ticker=$(printf "%s" "$2" | awk '{print toupper($0)}')
+    ticker=$(printf "%s" "$1" | awk '{print toupper($0)}')
     printf "%s\tprice: %s\n" "$ticker" "$price"
 }
 
@@ -73,7 +73,7 @@ else
         "-add" )
             add $2;;
         "-get" )
-            get $1 $2;;
+            get $2;;
         "-clean" )
             clean;;
         "-rm" )
