@@ -5,8 +5,8 @@
 class Stockcommandy < Formula
   desc "CLI tool for querying and creating a watchlist for your stocks"
   homepage "https://github.com/savala/stockCommandy"
-  url "https://github.com/savala/stockCommandy/archive/0.0.4.zip"
-  version "0.0.4"
+  url "https://github.com/savala/stockCommandy/archive/0.0.5.zip"
+  version "0.0.5"
   sha256 "cdb3f8092181cff2ee82eb3d9bacb5084d73023bd8f62eafb1a5097a4912df7b"
 
   # depends_on "cmake" => :build
