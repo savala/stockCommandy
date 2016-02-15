@@ -7,7 +7,7 @@ class Stockcommandy < Formula
   homepage "https://github.com/savala/stockCommandy"
   url "https://github.com/savala/stockCommandy/archive/0.0.4.zip"
   version "0.0.4"
-  sha256 "2c210b89217835342a3f79f56b67848e47135c8d0db6a0626d697090641ea3d0"
+  sha256 "cdb3f8092181cff2ee82eb3d9bacb5084d73023bd8f62eafb1a5097a4912df7b"
 
   # depends_on "cmake" => :build
   # depends_on :x11 # if your formula requires any X11/XQuartz components
