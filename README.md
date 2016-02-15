@@ -10,6 +10,12 @@ Make sure that your permissions are set so that the script can create a ~/.stock
 export PATH=$PATH:<path>/stockCommandy
 ```
 
+Or you can use homebrew
+```sh
+brew tap savala/stockCommandy
+brew install stockCommandy
+```
+
 If you'd like, you can go ahead and create an alias for stocks as well
 Within bashrc or zshrc or whatever you use
 
