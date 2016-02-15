@@ -8,7 +8,7 @@ get() {
             return
     fi
     url="http://download.finance.yahoo.com/d/quotes.csv?s=$2&f=l1"
-    price=$(curl -s $url)
+    price="$(curl -s "$url")"
     ticker=$(printf "%s" "$2" | awk '{print toupper($0)}')
     printf "%s\tprice: %s\n" "$ticker" "$price"
 }
@@ -19,12 +19,12 @@ add() {
     fi
     stock=$(printf "%s" "$1" | awk '{print toupper($0)}')
     printf "%s\n" "$stock" >> ~/.stocks/stocksList.txt
-    printf "Added %s to list of stocks.\n" $stock
+    printf "Added %s to list of stocks.\n" "$stock"
 }
 
 delete() {
-    stock=$(echo $1 | awk '{print toupper($0)}')
-    printf "%s" $stock | awk "!/$stock/" ~/.stocks/stocksList.txt > temp && mv temp ~/.stocks/stocksList.txt
+    stock="$(echo "$1" | awk '{print toupper($0)}')"
+    printf "%s" "$stock" | awk "!/$stock/" ~/.stocks/stocksList.txt > temp && mv temp ~/.stocks/stocksList.txt
 }
 
 clean() {
@@ -42,7 +42,7 @@ list() {
 
 openStockPage() {
     url="https://finance.yahoo.com/q?s=$1"
-    open $url
+    open "$url"
 }
 
 if [ -z "$1" ];then
@@ -56,11 +56,11 @@ if [ -z "$1" ];then
         done < ~/.stocks/stocksList.txt
         # url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=p"
         url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=l1a"
-        prices=$(curl -s $url)
+        prices="$(curl -s "$url")"
         prices=(${prices//\n/ })
         stocks=(${stocks//,/ })
         for key in "${!stocks[@]}"; do
-            stock=$(echo ${stocks[$key]} | awk '{print toupper($0)}')
+            stock="$(echo "${stocks[$key]}" | awk '{print toupper($0)}')"
             p=${prices[$key]}
             x=(${p//,/ })
             #echo "$stock\tPrice: ${x[0]}\tSomething: ${x[1]}";
@@ -70,14 +70,14 @@ if [ -z "$1" ];then
 else
     case $1 in
         "-add" )
-            add $2;;
+            add "$2";;
         "-get" )
-            get $1 $2;;
+            get "$1" "$2";;
         "-clean" )
             clean;;
         "-rm" )
             printf "Removed %s\n" "${2}"
-            delete $2;;
+            delete "$2";;
         "-list" )
             list;;
         "-help" )
