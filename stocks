@@ -36,6 +36,7 @@ add() {
 delete() {
     stock=$(echo $1 | awk '{print toupper($0)}')
     printf "%s" $stock | awk "!/$stock/" ~/.stocks/stocksList.txt > temp && mv temp ~/.stocks/stocksList.txt
+   printf "Removed %s\n" "${1}"
 }
 
 clean() {
@@ -88,7 +89,6 @@ else
         "-clean" )
             clean;;
         "-rm" )
-            printf "Removed %s\n" "${2}"
             delete $2;;
         "-open" )
             openStockPage $2;;
