@@ -32,8 +32,8 @@ clean() {
     rmdir ~/.stocks
 }
 
-help() {
-    printf "-add <ticker>, ie. -add xyz \n-clean\n-get xyz\n"
+helper() {
+    printf "To add: -add <ticker>, ie. -add xyz \n-clean\n-get xyz\n"
 }
 
 list() {
@@ -82,6 +82,6 @@ else
         "-list" )
             list;;
         "-help" )
-            help;;
+            helper;;
     esac
 fi
