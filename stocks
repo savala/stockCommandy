@@ -79,6 +79,8 @@ else
         "-rm" )
             printf "Removed %s\n" "${2}"
             delete $2;;
+        "-open" )
+            openStockPage $2;;
         "-list" )
             list;;
         "-help" )
