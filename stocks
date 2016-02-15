@@ -17,9 +17,20 @@ add() {
     if [ ! -d ~/.stocks ];then
         mkdir ~/.stocks
     fi
-    stock=$(printf "%s" "$1" | awk '{print toupper($0)}')
-    printf "%s\n" "$stock" >> ~/.stocks/stocksList.txt
-    printf "Added %s to list of stocks.\n" $stock
+    if [ ! -f ~/.stocks/stocksList.txt ];then
+        stock=$(printf "%s" "$1" | awk '{print toupper($0)}')
+        printf "%s\n" "$stock" >> ~/.stocks/stocksList.txt
+        printf "Added %s to list of stocks.\n" $stock
+    else
+        ticker=$(echo $1 | awk '{print toupper($0)}')
+        if grep -q "$ticker" ~/.stocks/stocksList.txt; then
+            echo "Already have $ticker in your watchlist"
+        else
+            stock=$(printf "%s" "$1" | awk '{print toupper($0)}')
+            printf "%s\n" "$stock" >> ~/.stocks/stocksList.txt
+            printf "Added %s to list of stocks.\n" $stock
+        fi
+    fi
 }
 
 delete() {
