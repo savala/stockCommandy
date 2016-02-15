@@ -37,6 +37,7 @@ help() {
 }
 
 list() {
+    printf "Stocks in your watchlist\n"
     cat ~/.stocks/stocksList.txt
 }
 
