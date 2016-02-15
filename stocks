@@ -63,22 +63,26 @@ if [ -z "$1" ];then
         printf "You must add a stock (i.e. stocks -add xyz)\n"
     else
         stocks=""
-        while read -r line
-        do
-            stocks+="$line,"
-        done < ~/.stocks/stocksList.txt
-        # url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=p"
-        url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=l1a"
-        prices=$(curl -s $url)
-        prices=(${prices//\n/ })
-        stocks=(${stocks//,/ })
-        for key in "${!stocks[@]}"; do
-            stock=$(echo ${stocks[$key]} | awk '{print toupper($0)}')
-            p=${prices[$key]}
-            x=(${p//,/ })
-            #echo "$stock\tPrice: ${x[0]}\tSomething: ${x[1]}";
-            printf "%s\tPrice: %s\n" "${stock}" "${x[0]}"
-        done
+        if [ ! -s ~/.stocks/stocksList.txt ];then
+            printf "You must add a stock (i.e. stocks -add xyz)\n"
+        else
+            while read -r line
+            do
+                stocks+="$line,"
+            done < ~/.stocks/stocksList.txt
+            # url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=p"
+            url="http://download.finance.yahoo.com/d/quotes.csv?s=$stocks&f=l1a"
+            prices=$(curl -s $url)
+            prices=(${prices//\n/ })
+            stocks=(${stocks//,/ })
+            for key in "${!stocks[@]}"; do
+                stock=$(echo ${stocks[$key]} | awk '{print toupper($0)}')
+                p=${prices[$key]}
+                x=(${p//,/ })
+                #echo "$stock\tPrice: ${x[0]}\tSomething: ${x[1]}";
+                printf "%s\tPrice: %s\n" "${stock}" "${x[0]}"
+            done
+        fi
     fi
 else
     case $1 in
